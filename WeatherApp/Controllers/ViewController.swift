@@ -8,7 +8,7 @@
 import UIKit
 import Foundation
 import SnapKit
-
+import CoreLocation
 
 class ViewController: UIViewController {
 
@@ -19,11 +19,14 @@ class ViewController: UIViewController {
     private let humidityLabel = WLabel()
     private let conditionLabel = WLabel()
 
+    private let locationManager = CLLocationManager()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         layoutViews()
 
+        setupCurrentLocation()
 
         WeatherService.shared.fetchWeatherData(
             latitude: 34.923096,
@@ -39,6 +42,12 @@ class ViewController: UIViewController {
                 }
             }
         }
+    }
+
+    private func setupCurrentLocation() {
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
     }
 
     private func setupViews() {
@@ -163,5 +172,32 @@ class ViewController: UIViewController {
         temperatureLabel.text = "Temperature: \(data.temperature)°C"
         humidityLabel.text = "Humidity: \(data.humidity)%"
         conditionLabel.text = "Condition: \(data.condition)"
+    }
+}
+
+
+extension ViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.last {
+            let latitude = location.coordinate.latitude
+            let longitude = location.coordinate.longitude
+
+            latitudeInput.text = "\(latitude)"
+            longitudeInput.text = "\(longitude)"
+            onSubmitButtonTapped()
+            // Update location only once 
+            locationManager.stopUpdatingLocation()
+            print("Current location: \(latitude), \(longitude)")
+        }
+    }
+
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedWhenInUse || status == .authorizedAlways {
+            locationManager.startUpdatingLocation()
+        }
+    }
+
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Failed to find user's location: \(error.localizedDescription)")
     }
 }
