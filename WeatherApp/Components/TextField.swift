@@ -26,5 +26,19 @@ class WTextField: UITextField {
         self.textColor = .black
         self.font = UIFont.systemFont(ofSize: 14)
         self.placeholder = "Enter value"
+
+        self.borderStyle = .roundedRect
+        self.backgroundColor = .white
+        self.textColor = .black
+        self.font = UIFont.systemFont(ofSize: 14)
+
+        self.attributedPlaceholder =
+        NSAttributedString(
+            string: "Enter text",
+            attributes: [
+                NSAttributedString.Key.foregroundColor: UIColor.gray
+            ]
+        )
+
     }
 }
