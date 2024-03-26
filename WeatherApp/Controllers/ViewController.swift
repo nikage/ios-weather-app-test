@@ -108,13 +108,14 @@ class ViewController: UIViewController {
 
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
+        formatter.locale = Locale.current
         let latitude = formatter.number(from: latitudeText)?.doubleValue
         let longitude = formatter.number(from: longitudeText)?.doubleValue
 
 
         guard let latitude = latitude, let longitude = longitude else {
 
-            print("Invalid input format for latitude or longitude")
+            showAlert(title: "Input error", message: "Invalid input format for latitude or longitude")
             return
         }
 
@@ -182,10 +183,15 @@ extension ViewController: CLLocationManagerDelegate {
             let latitude = location.coordinate.latitude
             let longitude = location.coordinate.longitude
 
-            latitudeInput.text = "\(latitude)"
-            longitudeInput.text = "\(longitude)"
+            let formatter = NumberFormatter()
+            formatter.numberStyle = .decimal
+            formatter.minimumFractionDigits = 8
+
+            latitudeInput.text = formatter.string(from: NSNumber(value: latitude))
+            longitudeInput.text = formatter.string(from: NSNumber(value: longitude))
             onSubmitButtonTapped()
-            // Update location only once 
+
+            // Update location only once
             locationManager.stopUpdatingLocation()
             print("Current location: \(latitude), \(longitude)")
         }
