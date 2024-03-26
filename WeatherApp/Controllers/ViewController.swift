@@ -22,6 +22,7 @@ class ViewController: UIViewController {
 
     private let switchLabel = WLabel()
 
+    private var  cachedWeatherData: WeatherData? = nil
 
     private let locationManager = CLLocationManager()
 
@@ -29,23 +30,9 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
         layoutViews()
-
         setupCurrentLocation()
 
-        WeatherService.shared.fetchWeatherData(
-            latitude: 34.923096,
-            longitude: 33.634045
-        ) { result in
-            DispatchQueue.main.async { [weak self] in
-                switch result {
-                case .success(let weatherData):
-                    self?.displayWeatherData(weatherData)
-                case .failure(let error):
-                    self?.showAlert(title: "Error", message: "Failed to fetch weather data: \(error.localizedDescription)")
-                    print("Error fetching weather data: \(error)")
-                }
-            }
-        }
+
     }
 
     private func setupCurrentLocation() {
@@ -74,11 +61,19 @@ class ViewController: UIViewController {
     }
 
     private func setupTempFormatSwitch() {
+        tempFormatSegmentedControl.addTarget(self, action: #selector(formatChanged), for: .valueChanged)
+
         tempFormatSegmentedControl.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-20)
         }
     }
+
+    @objc func formatChanged() {
+        guard let lastFetchedWeatherData = self.cachedWeatherData else { return }
+        displayWeatherData(lastFetchedWeatherData)
+    }
+
 
     private func setupInputs() {
         longitudeInput.placeholder = "Longitude"
@@ -187,7 +182,15 @@ class ViewController: UIViewController {
 
 
     private func displayWeatherData(_ data: WeatherData) {
-        temperatureLabel.text = "Temperature: \(data.temperature)°C"
+        self.cachedWeatherData = data
+        let selectedFormat = tempFormatSegmentedControl.selectedSegmentIndex == 0 ? "Celsius" : "Fahrenheit"
+
+
+        let formattedTemperature = convertTemperature(data.temperature, to: selectedFormat)
+
+
+        temperatureLabel.text = "Temperature: \(formattedTemperature)°\(selectedFormat.prefix(1))"
+
         humidityLabel.text = "Humidity: \(data.humidity)%"
         conditionLabel.text = "Condition: \(data.condition)"
     }
@@ -222,5 +225,16 @@ extension ViewController: CLLocationManagerDelegate {
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Failed to find user's location: \(error.localizedDescription)")
+    }
+}
+
+func convertTemperature(_ temperature: Double, to format: String) -> Double {
+    switch format {
+    case "Celsius":
+        return temperature
+    case "Fahrenheit":
+        return (temperature * 9/5) + 32
+    default:
+        return temperature
     }
 }
