@@ -34,6 +34,7 @@ class ViewController: UIViewController {
                 case .success(let weatherData):
                     self?.displayWeatherData(weatherData)
                 case .failure(let error):
+                    self?.showAlert(title: "Error", message: "Failed to fetch weather data: \(error.localizedDescription)")
                     print("Error fetching weather data: \(error)")
                 }
             }
@@ -116,7 +117,11 @@ class ViewController: UIViewController {
                 case .success(let weatherData):
                     self?.displayWeatherData(weatherData)
                 case .failure(let error):
-                    print ("Failed to fetch weather data: \(error.localizedDescription)")
+                    print("Failed to fetch weather data: \(error.localizedDescription)")
+                    self?.showAlert(
+                        title: "Error", 
+                        message: "Failed to fetch weather data: \(error.localizedDescription)"
+                    )
                 }
             }
         }
@@ -160,5 +165,3 @@ class ViewController: UIViewController {
         conditionLabel.text = "Condition: \(data.condition)"
     }
 }
-
-

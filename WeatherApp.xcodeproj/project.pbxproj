@@ -20,6 +20,7 @@
 		0A5CFA9E2BB2CAC50020581E /* OpenWeatherMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5CFA9D2BB2CAC50020581E /* OpenWeatherMap.swift */; };
 		0A718AE42BB33BE8006D1226 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A718AE32BB33BE8006D1226 /* Button.swift */; };
 		0A718AE62BB33BFE006D1226 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A718AE52BB33BFE006D1226 /* TextField.swift */; };
+		0A718AE92BB350CB006D1226 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A718AE82BB350CB006D1226 /* UIViewController+Alert.swift */; };
 		0AD13AD92BB305CB005477AA /* SnapKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AD13AD82BB305CB005477AA /* SnapKit.xcframework */; };
 		0AD13ADA2BB305D8005477AA /* SnapKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AD13AD82BB305CB005477AA /* SnapKit.xcframework */; };
 		0AD13ADB2BB305D8005477AA /* SnapKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0AD13AD82BB305CB005477AA /* SnapKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -76,6 +77,7 @@
 		0A5CFA9D2BB2CAC50020581E /* OpenWeatherMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWeatherMap.swift; sourceTree = "<group>"; };
 		0A718AE32BB33BE8006D1226 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		0A718AE52BB33BFE006D1226 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
+		0A718AE82BB350CB006D1226 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
 		0AD13AD82BB305CB005477AA /* SnapKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = SnapKit.xcframework; path = Carthage/Build/SnapKit.xcframework; sourceTree = "<group>"; };
 		0AD13ADD2BB30B20005477AA /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
 		0AD13AE02BB30CF9005477AA /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
@@ -136,7 +138,7 @@
 				0A5CFA9C2BB2CA3E0020581E /* Models */,
 				0A5CFA692BB2BED80020581E /* AppDelegate.swift */,
 				0A5CFA6B2BB2BED80020581E /* SceneDelegate.swift */,
-				0A5CFA6D2BB2BED80020581E /* ViewController.swift */,
+				0A718AE72BB350AE006D1226 /* Controllers */,
 				0A5CFA6F2BB2BED80020581E /* Main.storyboard */,
 				0A5CFA752BB2BEDB0020581E /* Assets.xcassets */,
 				0A5CFA772BB2BEDB0020581E /* LaunchScreen.storyboard */,
@@ -171,6 +173,15 @@
 				0A5CFA9D2BB2CAC50020581E /* OpenWeatherMap.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		0A718AE72BB350AE006D1226 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				0A5CFA6D2BB2BED80020581E /* ViewController.swift */,
+				0A718AE82BB350CB006D1226 /* UIViewController+Alert.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		0AD13ADF2BB30B4B005477AA /* Services */ = {
@@ -343,6 +354,7 @@
 				0A5CFA6E2BB2BED80020581E /* ViewController.swift in Sources */,
 				0A718AE42BB33BE8006D1226 /* Button.swift in Sources */,
 				0A5CFA6A2BB2BED80020581E /* AppDelegate.swift in Sources */,
+				0A718AE92BB350CB006D1226 /* UIViewController+Alert.swift in Sources */,
 				0AD13ADE2BB30B20005477AA /* WeatherService.swift in Sources */,
 				0A718AE62BB33BFE006D1226 /* TextField.swift in Sources */,
 				0AD13AE12BB30CF9005477AA /* Label.swift in Sources */,
