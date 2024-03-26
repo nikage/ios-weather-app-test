@@ -18,9 +18,13 @@
 		0A5CFA8E2BB2BEDB0020581E /* WeatherAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5CFA8D2BB2BEDB0020581E /* WeatherAppUITests.swift */; };
 		0A5CFA902BB2BEDB0020581E /* WeatherAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5CFA8F2BB2BEDB0020581E /* WeatherAppUITestsLaunchTests.swift */; };
 		0A5CFA9E2BB2CAC50020581E /* OpenWeatherMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5CFA9D2BB2CAC50020581E /* OpenWeatherMap.swift */; };
+		0A718AE42BB33BE8006D1226 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A718AE32BB33BE8006D1226 /* Button.swift */; };
+		0A718AE62BB33BFE006D1226 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A718AE52BB33BFE006D1226 /* TextField.swift */; };
 		0AD13AD92BB305CB005477AA /* SnapKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AD13AD82BB305CB005477AA /* SnapKit.xcframework */; };
 		0AD13ADA2BB305D8005477AA /* SnapKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AD13AD82BB305CB005477AA /* SnapKit.xcframework */; };
 		0AD13ADB2BB305D8005477AA /* SnapKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0AD13AD82BB305CB005477AA /* SnapKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0AD13ADE2BB30B20005477AA /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD13ADD2BB30B20005477AA /* WeatherService.swift */; };
+		0AD13AE12BB30CF9005477AA /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD13AE02BB30CF9005477AA /* Label.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,7 +74,11 @@
 		0A5CFA8D2BB2BEDB0020581E /* WeatherAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAppUITests.swift; sourceTree = "<group>"; };
 		0A5CFA8F2BB2BEDB0020581E /* WeatherAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		0A5CFA9D2BB2CAC50020581E /* OpenWeatherMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWeatherMap.swift; sourceTree = "<group>"; };
+		0A718AE32BB33BE8006D1226 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		0A718AE52BB33BFE006D1226 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		0AD13AD82BB305CB005477AA /* SnapKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = SnapKit.xcframework; path = Carthage/Build/SnapKit.xcframework; sourceTree = "<group>"; };
+		0AD13ADD2BB30B20005477AA /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
+		0AD13AE02BB30CF9005477AA /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +142,8 @@
 				0A5CFA772BB2BEDB0020581E /* LaunchScreen.storyboard */,
 				0A5CFA7A2BB2BEDB0020581E /* Info.plist */,
 				0A5CFA722BB2BED80020581E /* WeatherApp.xcdatamodeld */,
+				0AD13ADF2BB30B4B005477AA /* Services */,
+				0AD13AE22BB30CFE005477AA /* Components */,
 			);
 			path = WeatherApp;
 			sourceTree = "<group>";
@@ -161,6 +171,24 @@
 				0A5CFA9D2BB2CAC50020581E /* OpenWeatherMap.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		0AD13ADF2BB30B4B005477AA /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				0AD13ADD2BB30B20005477AA /* WeatherService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		0AD13AE22BB30CFE005477AA /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				0AD13AE02BB30CF9005477AA /* Label.swift */,
+				0A718AE32BB33BE8006D1226 /* Button.swift */,
+				0A718AE52BB33BFE006D1226 /* TextField.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		9640A86774011EBA7BB57BBE /* Frameworks */ = {
@@ -313,7 +341,11 @@
 				0A5CFA9E2BB2CAC50020581E /* OpenWeatherMap.swift in Sources */,
 				0A5CFA742BB2BED80020581E /* WeatherApp.xcdatamodeld in Sources */,
 				0A5CFA6E2BB2BED80020581E /* ViewController.swift in Sources */,
+				0A718AE42BB33BE8006D1226 /* Button.swift in Sources */,
 				0A5CFA6A2BB2BED80020581E /* AppDelegate.swift in Sources */,
+				0AD13ADE2BB30B20005477AA /* WeatherService.swift in Sources */,
+				0A718AE62BB33BFE006D1226 /* TextField.swift in Sources */,
+				0AD13AE12BB30CF9005477AA /* Label.swift in Sources */,
 				0A5CFA6C2BB2BED80020581E /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
