@@ -18,6 +18,9 @@
 		0A5CFA8E2BB2BEDB0020581E /* WeatherAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5CFA8D2BB2BEDB0020581E /* WeatherAppUITests.swift */; };
 		0A5CFA902BB2BEDB0020581E /* WeatherAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5CFA8F2BB2BEDB0020581E /* WeatherAppUITestsLaunchTests.swift */; };
 		0A5CFA9E2BB2CAC50020581E /* OpenWeatherMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5CFA9D2BB2CAC50020581E /* OpenWeatherMap.swift */; };
+		0AD13AD92BB305CB005477AA /* SnapKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AD13AD82BB305CB005477AA /* SnapKit.xcframework */; };
+		0AD13ADA2BB305D8005477AA /* SnapKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AD13AD82BB305CB005477AA /* SnapKit.xcframework */; };
+		0AD13ADB2BB305D8005477AA /* SnapKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0AD13AD82BB305CB005477AA /* SnapKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +40,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		0AD13ADC2BB305D8005477AA /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				0AD13ADB2BB305D8005477AA /* SnapKit.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		0A5CFA662BB2BED80020581E /* WeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A5CFA692BB2BED80020581E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -53,6 +70,7 @@
 		0A5CFA8D2BB2BEDB0020581E /* WeatherAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAppUITests.swift; sourceTree = "<group>"; };
 		0A5CFA8F2BB2BEDB0020581E /* WeatherAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		0A5CFA9D2BB2CAC50020581E /* OpenWeatherMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWeatherMap.swift; sourceTree = "<group>"; };
+		0AD13AD82BB305CB005477AA /* SnapKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = SnapKit.xcframework; path = Carthage/Build/SnapKit.xcframework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AD13ADA2BB305D8005477AA /* SnapKit.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,6 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AD13AD92BB305CB005477AA /* SnapKit.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,6 +107,8 @@
 				0A5CFA822BB2BEDB0020581E /* WeatherAppTests */,
 				0A5CFA8C2BB2BEDB0020581E /* WeatherAppUITests */,
 				0A5CFA672BB2BED80020581E /* Products */,
+				C87616CD432DF832AD1C8887 /* Pods */,
+				9640A86774011EBA7BB57BBE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -141,6 +163,21 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		9640A86774011EBA7BB57BBE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0AD13AD82BB305CB005477AA /* SnapKit.xcframework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C87616CD432DF832AD1C8887 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -151,6 +188,7 @@
 				0A5CFA622BB2BED80020581E /* Sources */,
 				0A5CFA632BB2BED80020581E /* Frameworks */,
 				0A5CFA642BB2BED80020581E /* Resources */,
+				0AD13ADC2BB305D8005477AA /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

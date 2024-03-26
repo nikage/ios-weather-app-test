@@ -6,8 +6,8 @@
 //
 
 import UIKit
-
 import Foundation
+import SnapKit
 
 
 
@@ -60,13 +60,66 @@ func fetchWeatherData(latitude: Double, longitude: Double, completion: @escaping
 }
 
 
+
+
 class ViewController: UIViewController {
+
+    // Define labels for displaying weather data
+    private let temperatureLabel = UILabel()
+    private let humidityLabel = UILabel()
+    private let conditionLabel = UILabel()
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupViews()
+        layoutViews()
 
-        fetchWeatherData(latitude:34.923096 , longitude: 33.634045){ data in
-            print(data)
+        // Example fetch call
+        fetchWeatherData(latitude: 34.923096, longitude: 33.634045) { result in
+            DispatchQueue.main.async { [weak self] in
+                switch result {
+                case .success(let weatherData):
+                    self?.displayWeatherData(weatherData)
+                case .failure(let error):
+                    print("Error fetching weather data: \(error)")
+                }
+            }
         }
     }
+
+    private func setupViews() {
+        // Configure labels (you might want to customize them further)
+        [temperatureLabel, humidityLabel, conditionLabel].forEach { label in
+            label.textColor = .black
+            label.textAlignment = .center
+            view.addSubview(label)
+        }
+    }
+
+    private func layoutViews() {
+        temperatureLabel.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(20)
+            make.centerX.equalToSuperview()
+        }
+        
+
+        humidityLabel.snp.makeConstraints { make in
+            make.top.equalTo(temperatureLabel.snp.bottom).offset(20)
+            make.centerX.equalToSuperview()
+        }
+
+        conditionLabel.snp.makeConstraints { make in
+            make.top.equalTo(humidityLabel.snp.bottom).offset(20)
+            make.centerX.equalToSuperview()
+        }
+    }
+
+    private func displayWeatherData(_ data: WeatherData) {
+        // Update UI with the fetched weather data
+        temperatureLabel.text = "Temperature: \(data.temperature)°C"
+        humidityLabel.text = "Humidity: \(data.humidity)%"
+        conditionLabel.text = "Condition: \(data.condition)"
+    }
 }
+
 
