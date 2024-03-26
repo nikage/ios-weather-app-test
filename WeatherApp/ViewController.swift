@@ -92,11 +92,19 @@ class ViewController: UIViewController {
     @objc private func onSubmitButtonTapped() {
         dismissKeyboard()
 
-        let latitudeText = self.latitudeInput.text ?? "0"
-        let longitudeText = self.longitudeInput.text ?? "0"
+        // Validate inputs for double
+        let latitudeText = self.latitudeInput.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "0"
+        let longitudeText = self.longitudeInput.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "0"
+
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        let latitude = formatter.number(from: latitudeText)?.doubleValue
+        let longitude = formatter.number(from: longitudeText)?.doubleValue
 
 
-        guard let latitude = Double(latitudeText), let longitude = Double(longitudeText) else {
+        guard let latitude = latitude, let longitude = longitude else {
+
+            print("Invalid input format for latitude or longitude")
             return
         }
 
