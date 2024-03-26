@@ -14,10 +14,14 @@ class ViewController: UIViewController {
 
     private let longitudeInput = WTextField()
     private let latitudeInput = WTextField()
-    private let submitButton = WButton()
     private let temperatureLabel = WLabel()
     private let humidityLabel = WLabel()
     private let conditionLabel = WLabel()
+    private let submitButton = WButton()
+    private let tempFormatSegmentedControl = WSegmentedControl(items: ["Celsius", "Fahrenheit"])
+
+    private let switchLabel = WLabel()
+
 
     private let locationManager = CLLocationManager()
 
@@ -59,12 +63,23 @@ class ViewController: UIViewController {
             temperatureLabel,
             humidityLabel,
             conditionLabel,
-            submitButton
+            submitButton,
+            tempFormatSegmentedControl,
+            switchLabel
         ].forEach { label in
             view.addSubview(label)
         }
         setupSubmitButton()
+        setupTempFormatSwitch()
     }
+
+    private func setupTempFormatSwitch() {
+        tempFormatSegmentedControl.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-20)
+        }
+    }
+
     private func setupInputs() {
         longitudeInput.placeholder = "Longitude"
         longitudeInput.keyboardType = .decimalPad
@@ -95,7 +110,9 @@ class ViewController: UIViewController {
             make.centerX.equalToSuperview()
         }
 
-        submitButton.addTarget(self, action: #selector(onSubmitButtonTapped), for: .touchUpInside)
+        submitButton.addTarget(
+            self, action: #selector(onSubmitButtonTapped), for: .touchUpInside
+        )
 
     }
 
