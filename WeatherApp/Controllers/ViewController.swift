@@ -38,7 +38,7 @@ class ViewController: UIViewController {
 
             label.text = newText
 
-            
+
             UIView.animate(withDuration: 0.2, delay: 0.1, options: .curveEaseIn, animations: {
                 label.alpha = 1.0
             }, completion: nil)
@@ -48,13 +48,22 @@ class ViewController: UIViewController {
 
 
     func downloadImage(from url: URL) {
-        URLSession.shared.dataTask(with: url) { data, response, error in
+        URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
             guard let data = data, error == nil else { return }
-            DispatchQueue.main.async { [weak self] in
-                self?.weatherIconImageView.image = UIImage(data: data)
+            DispatchQueue.main.async {
+                UIView.animate(withDuration: 0.4, delay: 1.3, options: .curveEaseIn, animations: {
+                    self?.weatherIconImageView.alpha = 0
+                }) { _ in
+                    self?.weatherIconImageView.image = UIImage(data: data)
+                    
+                    UIView.animate(withDuration: 0.4, animations: {
+                        self?.weatherIconImageView.alpha = 1
+                    })
+                }
             }
         }.resume()
     }
+
 
     private func setupCurrentLocation() {
         locationManager.delegate = self
