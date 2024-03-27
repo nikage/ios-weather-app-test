@@ -31,6 +31,17 @@ class ViewController: UIViewController {
         setupCurrentLocation()
     }
 
+    private func updateLabelWithAnimation(_ label: UILabel, newText: String) {
+        UIView.transition(
+            with: label,
+            duration: 0.4,
+            options: .transitionCrossDissolve,
+            animations: { label.text = newText },
+            completion: nil
+        )
+    }
+
+
     func downloadImage(from url: URL) {
         URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data, error == nil else { return }
@@ -213,15 +224,13 @@ class ViewController: UIViewController {
         self.cachedWeatherData = data
         let selectedFormat = tempFormatSegmentedControl.selectedSegmentIndex == 0 ? "Celsius" : "Fahrenheit"
 
-
         let formattedTemperature = convertTemperature(
             data.temperature, to: selectedFormat
         )
 
-        temperatureLabel.text = "Temperature: \(formattedTemperature)°\(selectedFormat.prefix(1))"
-
-        humidityLabel.text = "Humidity: \(data.humidity)%"
-        conditionLabel.text = "Condition: \(data.condition)"
+        updateLabelWithAnimation(temperatureLabel, newText: "Temperature: \(formattedTemperature)°\(selectedFormat.prefix(1))")
+        updateLabelWithAnimation(humidityLabel, newText: "Humidity: \(data.humidity)%")
+        updateLabelWithAnimation(conditionLabel, newText: "Condition: \(data.condition)")
 
         if let iconURL = WeatherService.shared.getIconURL(forIconCode: data.icon) {
             downloadImage(from: iconURL)
