@@ -169,20 +169,23 @@ class ViewController: UIViewController {
     }
 
     private func setupSubmitButton() {
-
         submitButton.setTitle(NSLocalizedString("buttons.checkWeather", comment:""), for: .normal)
         submitButton.isAccessibilityElement = true
         submitButton.accessibilityLabel = NSLocalizedString("buttons.checkWeather", comment: "")
 
+        submitButton.titleEdgeInsets = UIEdgeInsets(
+            top: 10, left: 30, bottom: 10, right: 30
+        )
+
         submitButton.snp.makeConstraints { make in
             make.top.equalTo(longitudeInput.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
+            make.width.equalTo(200)
         }
 
         submitButton.addTarget(
             self, action: #selector(onSubmitButtonTapped), for: .touchUpInside
         )
-
     }
 
     @objc private func onSubmitButtonTapped() {
