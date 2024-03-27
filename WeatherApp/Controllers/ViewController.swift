@@ -78,12 +78,18 @@ class ViewController: UIViewController {
     private func setupInputs() {
         longitudeInput.placeholder = "Longitude"
         longitudeInput.keyboardType = .decimalPad
+        longitudeInput.clearButtonMode = .whileEditing
+
 
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
 
-        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissKeyboard))
+        let flexibleSpace = UIBarButtonItem(
+            barButtonSystemItem: .flexibleSpace, target: nil, action: nil
+        )
+        let doneButton = UIBarButtonItem(
+            barButtonSystemItem: .done, target: self, action: #selector(dismissKeyboard)
+        )
 
         toolbar.setItems([flexibleSpace, doneButton], animated: false)
 
@@ -92,6 +98,8 @@ class ViewController: UIViewController {
 
         latitudeInput.placeholder = "Latitude"
         latitudeInput.keyboardType = .decimalPad
+        latitudeInput.clearButtonMode = .whileEditing
+
     }
 
 
