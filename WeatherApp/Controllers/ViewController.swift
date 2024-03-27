@@ -24,11 +24,26 @@ class ViewController: UIViewController {
     private let locationManager = CLLocationManager()
     private let weatherIconImageView = UIImageView()
 
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .onlineStatusChanged, object: nil)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         layoutViews()
         setupCurrentLocation()
+        NotificationCenter.default.addObserver(self, selector: #selector(handleOnlineStatusChange(_:)), name: .onlineStatusChanged, object: nil)
+    }
+
+    @objc func handleOnlineStatusChange(_ notification: Notification) {
+        if let userInfo = notification.userInfo, let isConnected = userInfo["isConnected"] as? Bool {
+            print("Online status changed. Is Connected: \(isConnected)")
+            if(isConnected){
+                onSubmitButtonTapped()
+            }
+
+        }
     }
 
     private func updateLabelWithAnimation(_ label: UILabel, newText: String, delay: TimeInterval) {

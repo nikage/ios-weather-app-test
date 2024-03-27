@@ -11,7 +11,12 @@ import Network
 class ConnectivityService {
     static let shared = ConnectivityService()
     private let monitor = NWPathMonitor()
-    private var isConnected: Bool = true
+
+    private(set) var isConnected: Bool = true {
+        didSet {
+            NotificationCenter.default.post(name: .onlineStatusChanged, object: nil, userInfo: ["isConnected": isConnected])
+        }
+    }
 
     var isNetworkAvailable: Bool {
         return isConnected
@@ -28,3 +33,7 @@ class ConnectivityService {
     }
 }
 
+
+extension Notification.Name {
+    static let onlineStatusChanged = Notification.Name("onlineStatusChanged")
+}
