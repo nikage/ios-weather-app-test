@@ -80,15 +80,7 @@ class ViewController: UIViewController {
         }
     }
 
-    func download(from url: URL, completion: @escaping (_ data: Data)-> Void) {
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            guard let data = data, error == nil else {
-                return
-            }
-            completion(data)
 
-        }.resume()
-    }
 
     private func setupCurrentLocation() {
         locationManager.delegate = self
@@ -351,6 +343,19 @@ extension ViewController: CLLocationManagerDelegate {
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Failed to find user's location: \(error.localizedDescription)")
+    }
+}
+
+extension ViewController {
+    // this has to be a part of some http service
+    func download(from url: URL, completion: @escaping (_ data: Data)-> Void) {
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data, error == nil else {
+                return
+            }
+            completion(data)
+
+        }.resume()
     }
 }
 
