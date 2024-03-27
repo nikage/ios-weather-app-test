@@ -18,14 +18,21 @@ class ViewController: UIViewController {
     private let humidityLabel = WLabel()
     private let conditionLabel = WLabel()
     private let submitButton = WButton()
-    private let tempFormatSegmentedControl = WSegmentedControl(items: [NSLocalizedString("buttons.tempFormat.celsius", comment: ""), NSLocalizedString("buttons.tempFormat.fahrenheit", comment: "")])
+    private let tempFormatSegmentedControl = WSegmentedControl(
+        items: [
+            NSLocalizedString("buttons.tempFormat.celsius", comment: ""),
+            NSLocalizedString("buttons.tempFormat.fahrenheit", comment: "")
+        ]
+    )
     private let switchLabel = WLabel()
     private var cachedWeatherData: WeatherData? = nil
     private let locationManager = CLLocationManager()
     private let weatherIconImageView = UIImageView()
 
     deinit {
-        NotificationCenter.default.removeObserver(self, name: .onlineStatusChanged, object: nil)
+        NotificationCenter.default.removeObserver(
+            self, name: .onlineStatusChanged, object: nil
+        )
     }
 
     override func viewDidLoad() {
@@ -33,7 +40,13 @@ class ViewController: UIViewController {
         setupViews()
         layoutViews()
         setupCurrentLocation()
-        NotificationCenter.default.addObserver(self, selector: #selector(handleOnlineStatusChange(_:)), name: .onlineStatusChanged, object: nil)
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleOnlineStatusChange(_:)),
+            name: .onlineStatusChanged,
+            object: nil
+        )
     }
 
     @objc func handleOnlineStatusChange(_ notification: Notification) {
@@ -47,27 +60,25 @@ class ViewController: UIViewController {
     }
 
     private func updateLabelWithAnimation(_ label: UILabel, newText: String, delay: TimeInterval) {
+        label.alpha = 0.0
+        label.text = newText
+
+
         UIView.animate(
             withDuration: 0.2,
             delay: delay,
             options: .curveEaseOut,
-            animations: { label.alpha = 0.0 }
+            animations: { label.alpha = 1.0 }
         ) { finished in
-
-            label.text = newText
-
-
             UIView.animate(
                 withDuration: 0.2,
-                delay: delay,
+                delay: 0.2,
                 options: .curveEaseIn,
-                animations: { label.alpha = 1.0 },
+                animations: {},
                 completion: nil
             )
         }
     }
-
-
 
     func download(from url: URL, completion: @escaping (_ data: Data)-> Void) {
         URLSession.shared.dataTask(with: url) { data, response, error in
@@ -78,7 +89,6 @@ class ViewController: UIViewController {
 
         }.resume()
     }
-
 
     private func setupCurrentLocation() {
         locationManager.delegate = self
