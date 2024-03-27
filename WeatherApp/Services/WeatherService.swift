@@ -12,7 +12,7 @@ class WeatherService {
 
     private init() {}
 
-    func fetchWeatherData(latitude: Double, longitude: Double, completion: @escaping (Result<WeatherData, Error>) -> Void) {
+    func fetchData(latitude: Double, longitude: Double, completion: @escaping (Result<WeatherData, Error>) -> Void) {
         let apiKey = "fe5fb82498da92150991ef75ef8119ce"
         let urlString = "https://api.openweathermap.org/data/2.5/weather?lat=\(latitude)&lon=\(longitude)&appid=\(apiKey)&units=metric"
 
@@ -46,9 +46,14 @@ class WeatherService {
                     )
                     completion(.success(weatherData))
                 } else {
-
-                    completion(.failure(
-                        NSError(domain: "WeatherDataError", code: -4, userInfo: [NSLocalizedDescriptionKey: "No weather conditions found in the response."]))
+                    completion(
+                        .failure(
+                            NSError(
+                                domain: "WeatherDataError",
+                                code: -4,
+                                userInfo: [NSLocalizedDescriptionKey: "No weather conditions found in the response."]
+                            )
+                        )
                     )
                 }
             } catch {

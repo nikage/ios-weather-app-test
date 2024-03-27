@@ -133,13 +133,13 @@ class ViewController: UIViewController {
 
         print("Latitude: \(latitudeText), Longitude: \(longitudeText)")
 
-        WeatherService.shared.fetchWeatherData(latitude: latitude, longitude: longitude) { [weak self] result in
+        WeatherService.shared.fetchData(latitude: latitude, longitude: longitude) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let weatherData):
                     self?.displayWeatherData(weatherData)
                 case .failure(let error):
-                    print("Failed to fetch weather data: \(error.localizedDescription)")
+
                     self?.showAlert(
                         title: "Error", 
                         message: "Failed to fetch weather data: \(error.localizedDescription)"
