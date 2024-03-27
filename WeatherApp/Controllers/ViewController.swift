@@ -91,7 +91,9 @@ class ViewController: UIViewController {
     private func setupViews() {
         weatherIconImageView.contentMode = .scaleAspectFit
         temperatureLabel.isAccessibilityElement = true
-        temperatureLabel.accessibilityLabel = NSLocalizedString("labels.temperature", comment: "")
+        temperatureLabel.accessibilityLabel = NSLocalizedString(
+            "labels.temperature", comment: ""
+        )
         setupInputs()
 
         [
@@ -131,21 +133,21 @@ class ViewController: UIViewController {
 
 
     private func setupInputs() {
-        // Setup longitude input
+
         longitudeInput.placeholder = NSLocalizedString("placeholder.longitude", comment: "")
         longitudeInput.isAccessibilityElement = true
         longitudeInput.accessibilityLabel = NSLocalizedString("accessibility.label.longitude", comment: "")
         longitudeInput.keyboardType = .decimalPad
         longitudeInput.clearButtonMode = .whileEditing
 
-        // Setup latitude input
+
         latitudeInput.placeholder = NSLocalizedString("placeholder.latitude", comment: "")
         latitudeInput.isAccessibilityElement = true
         latitudeInput.accessibilityLabel = NSLocalizedString("accessibility.label.latitude", comment: "")
         latitudeInput.keyboardType = .decimalPad
         latitudeInput.clearButtonMode = .whileEditing
 
-        // Common toolbar setup for both inputs
+
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
 
