@@ -31,15 +31,20 @@ class ViewController: UIViewController {
         setupCurrentLocation()
     }
 
-    private func updateLabelWithAnimation(_ label: UILabel, newText: String) {
-        UIView.transition(
-            with: label,
-            duration: 0.4,
-            options: .transitionCrossDissolve,
-            animations: { label.text = newText },
-            completion: nil
-        )
+    private func updateLabelWithAnimation(_ label: UILabel, newText: String, delay: TimeInterval) {
+        UIView.animate(withDuration: 0.2, delay: delay, options: .curveEaseOut, animations: {
+            label.alpha = 0.0
+        }) { (finished) in
+
+            label.text = newText
+
+            
+            UIView.animate(withDuration: 0.2, delay: 0.1, options: .curveEaseIn, animations: {
+                label.alpha = 1.0
+            }, completion: nil)
+        }
     }
+
 
 
     func downloadImage(from url: URL) {
@@ -222,15 +227,29 @@ class ViewController: UIViewController {
 
     private func displayWeatherData(_ data: WeatherData) {
         self.cachedWeatherData = data
-        let selectedFormat = tempFormatSegmentedControl.selectedSegmentIndex == 0 ? "Celsius" : "Fahrenheit"
+        let selectedFormat = tempFormatSegmentedControl.selectedSegmentIndex == 0
+            ? "Celsius"
+            : "Fahrenheit"
 
         let formattedTemperature = convertTemperature(
             data.temperature, to: selectedFormat
         )
 
-        updateLabelWithAnimation(temperatureLabel, newText: "Temperature: \(formattedTemperature)°\(selectedFormat.prefix(1))")
-        updateLabelWithAnimation(humidityLabel, newText: "Humidity: \(data.humidity)%")
-        updateLabelWithAnimation(conditionLabel, newText: "Condition: \(data.condition)")
+        updateLabelWithAnimation(
+            temperatureLabel,
+            newText: "Temperature: \(formattedTemperature)°\(selectedFormat.prefix(1))",
+            delay: 0.3
+        )
+        updateLabelWithAnimation(
+            humidityLabel,
+            newText: "Humidity: \(data.humidity)%",
+            delay: 0.6
+        )
+        updateLabelWithAnimation(
+            conditionLabel,
+            newText: "Condition: \(data.condition)",
+            delay: 0.9
+        )
 
         if let iconURL = WeatherService.shared.getIconURL(forIconCode: data.icon) {
             downloadImage(from: iconURL)
