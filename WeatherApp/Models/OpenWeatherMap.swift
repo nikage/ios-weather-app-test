@@ -22,7 +22,7 @@ struct Weather: Codable {
     let icon: String
 }
 
-struct WeatherData {
+struct WeatherData: Codable {
     let temperature: Double
     let humidity: Int
     let condition: String

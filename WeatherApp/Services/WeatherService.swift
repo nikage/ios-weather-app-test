@@ -11,8 +11,23 @@ class WeatherService {
     static let shared = WeatherService()
 
     private init() {}
-
     func fetchData(latitude: Double, longitude: Double, completion: @escaping (Result<WeatherData, Error>) -> Void) {
+        if ConnectivityService.shared.isNetworkAvailable {
+            fetchNetworkData(
+                latitude: latitude, longitude: longitude, completion: completion
+            )
+        } else {
+
+            if let cachedData = CacheService.shared.getCachedWeatherData() {
+                completion(.success(cachedData))
+            } else {
+                completion(.failure(NSError(domain: "NoConnectivity", code: -3, userInfo: [NSLocalizedDescriptionKey: "Offline mode: No cached data available."])))
+            }
+        }
+    }
+
+
+    func fetchNetworkData(latitude: Double, longitude: Double, completion: @escaping (Result<WeatherData, Error>) -> Void) {
         let apiKey = "fe5fb82498da92150991ef75ef8119ce"
         let urlString = "https://api.openweathermap.org/data/2.5/weather?lat=\(latitude)&lon=\(longitude)&appid=\(apiKey)&units=metric"
 
@@ -43,9 +58,10 @@ class WeatherService {
                         temperature: temperature,
                         humidity: humidity,
                         condition: weatherCondition,
-                        icon: iconCode 
+                        icon: iconCode
                     )
                     completion(.success(weatherData))
+                    CacheService.shared.cacheWeatherData(weatherData)
                 } else {
                     completion(.failure(
                         NSError(

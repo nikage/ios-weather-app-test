@@ -48,8 +48,10 @@ class ViewController: UIViewController {
 
 
     func download(from url: URL, completion: @escaping (_ data: Data)-> Void) {
-        URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
-            guard let data = data, error == nil else { return }
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data, error == nil else {
+                return
+            }
             completion(data)
 
         }.resume()
