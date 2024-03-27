@@ -47,16 +47,23 @@ class ViewController: UIViewController {
     }
 
     private func updateLabelWithAnimation(_ label: UILabel, newText: String, delay: TimeInterval) {
-        UIView.animate(withDuration: 0.2, delay: delay, options: .curveEaseOut, animations: {
-            label.alpha = 0.0
-        }) { (finished) in
+        UIView.animate(
+            withDuration: 0.2,
+            delay: delay,
+            options: .curveEaseOut,
+            animations: { label.alpha = 0.0 }
+        ) { finished in
 
             label.text = newText
 
 
-            UIView.animate(withDuration: 0.2, delay: 0.1, options: .curveEaseIn, animations: {
-                label.alpha = 1.0
-            }, completion: nil)
+            UIView.animate(
+                withDuration: 0.2,
+                delay: delay,
+                options: .curveEaseIn,
+                animations: { label.alpha = 1.0 },
+                completion: nil
+            )
         }
     }
 
@@ -89,8 +96,8 @@ class ViewController: UIViewController {
             longitudeInput,
             latitudeInput,
             temperatureLabel,
-            humidityLabel,
             conditionLabel,
+            humidityLabel,
             submitButton,
             tempFormatSegmentedControl,
             switchLabel,
@@ -190,7 +197,7 @@ class ViewController: UIViewController {
         guard let latitude = latitude, let longitude = longitude else {
 
             showAlert(
-                title: "Input error", 
+                title: "Input error",
                 message: "Invalid input format for latitude or longitude"
             )
             return
@@ -257,8 +264,8 @@ class ViewController: UIViewController {
     private func displayWeatherData(_ data: WeatherData) {
         self.cachedWeatherData = data
         let selectedFormat = tempFormatSegmentedControl.selectedSegmentIndex == 0
-            ? NSLocalizedString("buttons.tempFormat.celsius", comment: "")
-            : NSLocalizedString("buttons.tempFormat.fahrenheit", comment: "")
+        ? NSLocalizedString("buttons.tempFormat.celsius", comment: "")
+        : NSLocalizedString("buttons.tempFormat.fahrenheit", comment: "")
 
 
         let formattedTemperature = convertTemperature(
@@ -270,14 +277,16 @@ class ViewController: UIViewController {
             newText: "\(NSLocalizedString("labels.temperature", comment:"temperature label")): \(formattedTemperature)°\(selectedFormat.prefix(1))",
             delay: 0.3
         )
-        updateLabelWithAnimation(
-            humidityLabel,
-            newText: "\(NSLocalizedString("labels.humidity", comment:"")): \(data.humidity)%",
-            delay: 0.6
-        )
+
         updateLabelWithAnimation(
             conditionLabel,
             newText: "\(NSLocalizedString("labels.condition", comment:"")): \(data.condition)",
+            delay: 0.6
+        )
+
+        updateLabelWithAnimation(
+            humidityLabel,
+            newText: "\(NSLocalizedString("labels.humidity", comment:"")): \(data.humidity)%",
             delay: 0.9
         )
 
