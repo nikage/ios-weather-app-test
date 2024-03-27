@@ -38,30 +38,39 @@ class WeatherService {
                 let decodedData = try JSONDecoder().decode(WeatherResponse.self, from: data)
                 let temperature = decodedData.main.temp
                 let humidity = decodedData.main.humidity
-
-
-                if let weatherCondition = decodedData.weather.first?.main {
+                if let weatherCondition = decodedData.weather.first?.main, let iconCode = decodedData.weather.first?.icon {
                     let weatherData = WeatherData(
-                        temperature: temperature, humidity: humidity, condition: weatherCondition
+                        temperature: temperature,
+                        humidity: humidity,
+                        condition: weatherCondition,
+                        icon: iconCode 
                     )
                     completion(.success(weatherData))
                 } else {
-                    completion(
-                        .failure(
-                            NSError(
-                                domain: "WeatherDataError",
-                                code: -4,
-                                userInfo: [NSLocalizedDescriptionKey: "No weather conditions found in the response."]
-                            )
+                    completion(.failure(
+                        NSError(
+                            domain: "WeatherDataError",
+                            code: -4,
+                            userInfo: [NSLocalizedDescriptionKey: "No weather conditions found in the response."]
                         )
-                    )
+                    ))
                 }
             } catch {
                 completion(.failure(error))
             }
 
+
         }
 
         task.resume()
+    }
+}
+
+
+extension WeatherService {
+    func getIconURL(forIconCode iconCode: String) -> URL? {
+        let baseURL = "https://openweathermap.org/img/wn/"
+        let iconURLString = "\(baseURL)\(iconCode)@2x.png" // @2x for higher resolution
+        return URL(string: iconURLString)
     }
 }

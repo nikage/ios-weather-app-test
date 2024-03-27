@@ -19,10 +19,13 @@ struct Main: Codable {
 
 struct Weather: Codable {
     let main: String
+    let icon: String
 }
 
 struct WeatherData {
     let temperature: Double
     let humidity: Int
     let condition: String
+    let icon: String
+
 }

@@ -19,20 +19,25 @@ class ViewController: UIViewController {
     private let conditionLabel = WLabel()
     private let submitButton = WButton()
     private let tempFormatSegmentedControl = WSegmentedControl(items: ["Celsius", "Fahrenheit"])
-
     private let switchLabel = WLabel()
-
-    private var  cachedWeatherData: WeatherData? = nil
-
+    private var cachedWeatherData: WeatherData? = nil
     private let locationManager = CLLocationManager()
+    private let weatherIconImageView = UIImageView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         layoutViews()
         setupCurrentLocation()
+    }
 
-
+    func downloadImage(from url: URL) {
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data, error == nil else { return }
+            DispatchQueue.main.async { [weak self] in
+                self?.weatherIconImageView.image = UIImage(data: data)
+            }
+        }.resume()
     }
 
     private func setupCurrentLocation() {
@@ -42,6 +47,8 @@ class ViewController: UIViewController {
     }
 
     private func setupViews() {
+        weatherIconImageView.contentMode = .scaleAspectFit
+
         setupInputs()
 
         [
@@ -52,9 +59,10 @@ class ViewController: UIViewController {
             conditionLabel,
             submitButton,
             tempFormatSegmentedControl,
-            switchLabel
-        ].forEach { label in
-            view.addSubview(label)
+            switchLabel,
+            weatherIconImageView
+        ].forEach { subView in
+            view.addSubview(subView)
         }
         setupSubmitButton()
         setupTempFormatSwitch()
@@ -193,7 +201,11 @@ class ViewController: UIViewController {
             make.centerX.equalToSuperview()
         }
 
-
+        weatherIconImageView.snp.makeConstraints { make in
+            make.top.equalTo(humidityLabel.snp.bottom).offset(20)
+            make.centerX.equalToSuperview()
+            make.width.height.equalTo(50)
+        }
     }
 
 
@@ -202,13 +214,18 @@ class ViewController: UIViewController {
         let selectedFormat = tempFormatSegmentedControl.selectedSegmentIndex == 0 ? "Celsius" : "Fahrenheit"
 
 
-        let formattedTemperature = convertTemperature(data.temperature, to: selectedFormat)
-
+        let formattedTemperature = convertTemperature(
+            data.temperature, to: selectedFormat
+        )
 
         temperatureLabel.text = "Temperature: \(formattedTemperature)°\(selectedFormat.prefix(1))"
 
         humidityLabel.text = "Humidity: \(data.humidity)%"
         conditionLabel.text = "Condition: \(data.condition)"
+
+        if let iconURL = WeatherService.shared.getIconURL(forIconCode: data.icon) {
+            downloadImage(from: iconURL)
+        }
     }
 }
 
