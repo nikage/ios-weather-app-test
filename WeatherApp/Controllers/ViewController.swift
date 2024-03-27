@@ -81,7 +81,8 @@ class ViewController: UIViewController {
 
     private func setupViews() {
         weatherIconImageView.contentMode = .scaleAspectFit
-
+        temperatureLabel.isAccessibilityElement = true
+        temperatureLabel.accessibilityLabel = NSLocalizedString("labels.temperature", comment: "")
         setupInputs()
 
         [
@@ -118,6 +119,9 @@ class ViewController: UIViewController {
 
     private func setupInputs() {
         longitudeInput.placeholder = "Longitude"
+        longitudeInput.isAccessibilityElement = true
+        longitudeInput.accessibilityLabel = NSLocalizedString("Longitude", comment: "")
+
         longitudeInput.keyboardType = .decimalPad
         longitudeInput.clearButtonMode = .whileEditing
 
@@ -138,6 +142,9 @@ class ViewController: UIViewController {
         latitudeInput.inputAccessoryView = toolbar
 
         latitudeInput.placeholder = "Latitude"
+        latitudeInput.isAccessibilityElement = true
+        latitudeInput.accessibilityLabel = NSLocalizedString("Latitude", comment: "")
+
         latitudeInput.keyboardType = .decimalPad
         latitudeInput.clearButtonMode = .whileEditing
 
@@ -152,6 +159,8 @@ class ViewController: UIViewController {
     private func setupSubmitButton() {
 
         submitButton.setTitle(NSLocalizedString("buttons.checkWeather", comment:""), for: .normal)
+        submitButton.isAccessibilityElement = true
+        submitButton.accessibilityLabel = NSLocalizedString("buttons.checkWeather", comment: "")
 
         submitButton.snp.makeConstraints { make in
             make.top.equalTo(longitudeInput.snp.bottom).offset(20)
@@ -180,7 +189,10 @@ class ViewController: UIViewController {
 
         guard let latitude = latitude, let longitude = longitude else {
 
-            showAlert(title: "Input error", message: "Invalid input format for latitude or longitude")
+            showAlert(
+                title: "Input error", 
+                message: "Invalid input format for latitude or longitude"
+            )
             return
         }
 
@@ -245,8 +257,9 @@ class ViewController: UIViewController {
     private func displayWeatherData(_ data: WeatherData) {
         self.cachedWeatherData = data
         let selectedFormat = tempFormatSegmentedControl.selectedSegmentIndex == 0
-        ? NSLocalizedString("buttons.tempFormat.celsius", comment: "")
-        : NSLocalizedString("buttons.tempFormat.fahrenheit", comment: "")
+            ? NSLocalizedString("buttons.tempFormat.celsius", comment: "")
+            : NSLocalizedString("buttons.tempFormat.fahrenheit", comment: "")
+
 
         let formattedTemperature = convertTemperature(
             data.temperature, to: selectedFormat
