@@ -5,6 +5,10 @@
   Created by Mykola Mikhno on 27.03.2024.
   
 */
+"placeholder.longitude" = "Довгота";
+"placeholder.latitude" = "Широта";
+"accessibility.label.longitude" = "Введіть довготу";
+"accessibility.label.latitude" = "Ведіть широту";
 "buttons.checkWeather" = "Перевірити погоду";
 "buttons.tempFormat.celsius" = "Цельсій";
 "buttons.tempFormat.fahrenheit" = "Фаренгейт";

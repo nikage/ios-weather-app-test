@@ -5,6 +5,11 @@
   Created by Mykola Mikhno on 27.03.2024.
   
 */
+
+"placeholder.longitude" = "Longitude";
+"placeholder.latitude" = "Latitude";
+"accessibility.label.longitude" = "Input for longitude";
+"accessibility.label.latitude" = "Input for latitude";
 "buttons.checkWeather" = "Check Weather";
 "buttons.tempFormat.celsius" = "Celsius";
 "buttons.tempFormat.fahrenheit" = "Fahrenheit";

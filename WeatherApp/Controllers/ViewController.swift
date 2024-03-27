@@ -112,7 +112,11 @@ class ViewController: UIViewController {
     }
 
     private func setupTempFormatSwitch() {
-        tempFormatSegmentedControl.addTarget(self, action: #selector(formatChanged), for: .valueChanged)
+        tempFormatSegmentedControl.addTarget(
+            self, 
+            action: #selector(formatChanged),
+            for: .valueChanged
+        )
 
         tempFormatSegmentedControl.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
@@ -127,14 +131,21 @@ class ViewController: UIViewController {
 
 
     private func setupInputs() {
-        longitudeInput.placeholder = "Longitude"
+        // Setup longitude input
+        longitudeInput.placeholder = NSLocalizedString("placeholder.longitude", comment: "")
         longitudeInput.isAccessibilityElement = true
-        longitudeInput.accessibilityLabel = NSLocalizedString("Longitude", comment: "")
-
+        longitudeInput.accessibilityLabel = NSLocalizedString("accessibility.label.longitude", comment: "")
         longitudeInput.keyboardType = .decimalPad
         longitudeInput.clearButtonMode = .whileEditing
 
+        // Setup latitude input
+        latitudeInput.placeholder = NSLocalizedString("placeholder.latitude", comment: "")
+        latitudeInput.isAccessibilityElement = true
+        latitudeInput.accessibilityLabel = NSLocalizedString("accessibility.label.latitude", comment: "")
+        latitudeInput.keyboardType = .decimalPad
+        latitudeInput.clearButtonMode = .whileEditing
 
+        // Common toolbar setup for both inputs
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
 
@@ -149,14 +160,6 @@ class ViewController: UIViewController {
 
         longitudeInput.inputAccessoryView = toolbar
         latitudeInput.inputAccessoryView = toolbar
-
-        latitudeInput.placeholder = "Latitude"
-        latitudeInput.isAccessibilityElement = true
-        latitudeInput.accessibilityLabel = NSLocalizedString("Latitude", comment: "")
-
-        latitudeInput.keyboardType = .decimalPad
-        latitudeInput.clearButtonMode = .whileEditing
-
     }
 
 
