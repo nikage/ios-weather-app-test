@@ -1,0 +1,13 @@
+/* 
+  Localizable.strings
+  WeatherApp
+
+  Created by Mykola Mikhno on 27.03.2024.
+  
+*/
+"buttons.checkWeather" = "Перевірити погоду";
+"buttons.tempFormat.celsius" = "Цельсій";
+"buttons.tempFormat.fahrenheit" = "Фаренгейт";
+"labels.temperature" = "Температура";
+"labels.condition" = "Умови";
+"labels.humidity" = "Вологість";

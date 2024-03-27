@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     private let humidityLabel = WLabel()
     private let conditionLabel = WLabel()
     private let submitButton = WButton()
-    private let tempFormatSegmentedControl = WSegmentedControl(items: ["Celsius", "Fahrenheit"])
+    private let tempFormatSegmentedControl = WSegmentedControl(items: [NSLocalizedString("buttons.tempFormat.celsius", comment: ""), NSLocalizedString("buttons.tempFormat.fahrenheit", comment: "")])
     private let switchLabel = WLabel()
     private var cachedWeatherData: WeatherData? = nil
     private let locationManager = CLLocationManager()
@@ -151,7 +151,7 @@ class ViewController: UIViewController {
 
     private func setupSubmitButton() {
 
-        submitButton.setTitle("Check Weather", for: .normal)
+        submitButton.setTitle(NSLocalizedString("buttons.checkWeather", comment:""), for: .normal)
 
         submitButton.snp.makeConstraints { make in
             make.top.equalTo(longitudeInput.snp.bottom).offset(20)
@@ -245,8 +245,8 @@ class ViewController: UIViewController {
     private func displayWeatherData(_ data: WeatherData) {
         self.cachedWeatherData = data
         let selectedFormat = tempFormatSegmentedControl.selectedSegmentIndex == 0
-        ? "Celsius"
-        : "Fahrenheit"
+        ? NSLocalizedString("buttons.tempFormat.celsius", comment: "")
+        : NSLocalizedString("buttons.tempFormat.fahrenheit", comment: "")
 
         let formattedTemperature = convertTemperature(
             data.temperature, to: selectedFormat
@@ -254,17 +254,17 @@ class ViewController: UIViewController {
 
         updateLabelWithAnimation(
             temperatureLabel,
-            newText: "Temperature: \(formattedTemperature)°\(selectedFormat.prefix(1))",
+            newText: "\(NSLocalizedString("labels.temperature", comment:"temperature label")): \(formattedTemperature)°\(selectedFormat.prefix(1))",
             delay: 0.3
         )
         updateLabelWithAnimation(
             humidityLabel,
-            newText: "Humidity: \(data.humidity)%",
+            newText: "\(NSLocalizedString("labels.humidity", comment:"")): \(data.humidity)%",
             delay: 0.6
         )
         updateLabelWithAnimation(
             conditionLabel,
-            newText: "Condition: \(data.condition)",
+            newText: "\(NSLocalizedString("labels.condition", comment:"")): \(data.condition)",
             delay: 0.9
         )
 

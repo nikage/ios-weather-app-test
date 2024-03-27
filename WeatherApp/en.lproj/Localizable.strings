@@ -1,0 +1,13 @@
+/* 
+  Localizable.strings
+  WeatherApp
+
+  Created by Mykola Mikhno on 27.03.2024.
+  
+*/
+"buttons.checkWeather" = "Check Weather";
+"buttons.tempFormat.celsius" = "Celsius";
+"buttons.tempFormat.fahrenheit" = "Fahrenheit";
+"labels.temperature" = "Temperature";
+"labels.condition" = "Condition";
+"labels.humidity" = "Humidity";
