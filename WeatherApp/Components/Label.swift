@@ -21,8 +21,6 @@ class WLabel: UILabel {
     }
 
     private func customizeBackground() {
-        self.backgroundColor = UIColor.lightGray
-        self.textColor = .black
-        self.textAlignment = .center
+
     }
 }

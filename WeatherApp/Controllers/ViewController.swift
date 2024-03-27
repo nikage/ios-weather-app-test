@@ -86,7 +86,6 @@ class ViewController: UIViewController {
         toolbar.setItems([doneButton], animated: false)
         longitudeInput.inputAccessoryView = toolbar
         latitudeInput.inputAccessoryView = toolbar
-
         latitudeInput.placeholder = "Latitude"
         latitudeInput.keyboardType = .decimalPad
     }
@@ -98,10 +97,10 @@ class ViewController: UIViewController {
 
     private func setupSubmitButton() {
 
-        submitButton.setTitle("Submit", for: .normal)
+        submitButton.setTitle("Check Weather", for: .normal)
 
         submitButton.snp.makeConstraints { make in
-            make.top.equalTo(conditionLabel.snp.bottom).offset(20)
+            make.top.equalTo(longitudeInput.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
         }
 
@@ -133,7 +132,9 @@ class ViewController: UIViewController {
 
         print("Latitude: \(latitudeText), Longitude: \(longitudeText)")
 
-        WeatherService.shared.fetchData(latitude: latitude, longitude: longitude) { [weak self] result in
+        WeatherService.shared.fetchData(
+            latitude: latitude, longitude: longitude
+        ) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let weatherData):
@@ -141,7 +142,7 @@ class ViewController: UIViewController {
                 case .failure(let error):
 
                     self?.showAlert(
-                        title: "Error", 
+                        title: "Error",
                         message: "Failed to fetch weather data: \(error.localizedDescription)"
                     )
                 }
@@ -165,19 +166,21 @@ class ViewController: UIViewController {
         }
 
         temperatureLabel.snp.makeConstraints { make in
-            make.top.equalTo(longitudeInput.snp.bottom).offset(20)
-            make.centerX.equalToSuperview()
-        }
-
-        humidityLabel.snp.makeConstraints { make in
-            make.top.equalTo(temperatureLabel.snp.bottom).offset(20)
+            make.centerY.equalToSuperview()
             make.centerX.equalToSuperview()
         }
 
         conditionLabel.snp.makeConstraints { make in
-            make.top.equalTo(humidityLabel.snp.bottom).offset(20)
+            make.top.equalTo(temperatureLabel.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
         }
+
+        humidityLabel.snp.makeConstraints { make in
+            make.top.equalTo(conditionLabel.snp.bottom).offset(20)
+            make.centerX.equalToSuperview()
+        }
+
+
     }
 
 
